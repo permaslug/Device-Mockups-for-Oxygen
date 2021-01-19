@@ -1,0 +1,52 @@
+function device_css_mockup_shortcode( $atts, $content = null ) {
+  
+    $a = shortcode_atts( array(
+     'device' => 'iPhone-X',
+     'colour' => '',
+    ), $atts);
+    
+    if(!empty(esc_attr($a['colour']))){
+        $colour_variable = 1;
+    }
+    
+    switch ($colour_variable) {
+        
+        case 0:
+            return '
+            <div style="z-index:99;overflow:hidden;" class="device device-' . esc_attr($a['device']) . '">
+  <div style="z-index:99;" class="device-frame">
+    <div style="overflow-y:scroll; -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);" class="device-content">
+    </div>
+    '. $content .'
+  </div>
+
+  <div class="device-stripe"></div>
+  <div class="device-header"></div>
+  <div class="device-sensors"></div>
+  <div class="device-btns"></div>
+  <div class="device-power"></div>
+</div>';
+            break;
+        
+        case 1:
+             return ' <div style="z-index:99;overflow:hidden;" class="device device-' . esc_attr($a['device']) . ' device-' . esc_attr($a['colour']) . '">
+  <div style="z-index:99;" class="device-frame">
+    <div style="overflow-y:scroll; -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);" class="device-content">
+    '. $content .'
+  
+  </div>
+  </div>
+  <div class="device-stripe"></div>
+  <div class="device-header"></div>
+  <div class="device-sensors"></div>
+  <div class="device-btns"></div>
+  <div class="device-power"></div>
+</div>';
+            break;
+        
+        
+    }
+
+
+}
+add_shortcode('device_mockup', 'device_css_mockup_shortcode');
